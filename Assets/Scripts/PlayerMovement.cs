@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         Physics.gravity = new(0, -Physics.gravity.y, 0);
         camTransform.localPosition = new(camTransform.localPosition.x, -camTransform.localPosition.y, camTransform.localPosition.z);
         camTransform.localEulerAngles = new(-camTransform.localEulerAngles.x, camTransform.localEulerAngles.y, 0);
+        rb.velocity = new(rb.velocity.x, -rb.velocity.y, 0);
     }
 
 

@@ -16,6 +16,9 @@ public class ParallelWorldManager : MonoBehaviour
     [Tooltip("List of objects in parallel world.")]
     [SerializeField] Transform lowerObjectGroup;
 
+    [Tooltip("Time between allowed movements")]
+    [SerializeField] float cooldownTime = 3f;
+    private float lastMovementTime;
 
     private Animator[] upperObjectsList;
     private Animator[] lowerObjectsList;
@@ -34,7 +37,7 @@ public class ParallelWorldManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) && Time.time - lastMovementTime > cooldownTime)
         {
             isInParallelWorld = !isInParallelWorld;
             player.JumpToParallelWorld();
@@ -45,6 +48,8 @@ public class ParallelWorldManager : MonoBehaviour
 
     private void ManageAnimations(bool parallel)
     {
+        lastMovementTime = Time.time;
+
         if (!parallel)
         {
             foreach (Animator animator in upperObjectsList)
